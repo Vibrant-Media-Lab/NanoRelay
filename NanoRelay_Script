@@ -1,0 +1,9 @@
+/**
+ * NanoRelay
+ * Author: Pau Balcells Sanchez
+ * Pitt Vibrant Media Lab: 2023
+ */
+ 
+ // Associate physical button states with their output
+#define UP          HIGH
+#define DOWN        LOW
