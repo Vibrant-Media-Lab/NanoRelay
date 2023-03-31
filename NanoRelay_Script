@@ -4,6 +4,44 @@
  * Pitt Vibrant Media Lab: 2023
  */
  
+ //User specific parameters
+ 
+  //In 1 delay: duration of time in ms that In 1 pin needs to be pulled low before it leads to a trigger event
+  const int duration1 = 0;
+  //In 1 delay: duration of time that In 1 pin needs to be pulled low before it leads to a trigger event
+  const int delay1 = 0;
+  
+  //In 2 duration and delay same as In1 but for the In 2 pin
+  const int duration2 = 0;
+  const int delay2 = 0;
+  // In 2 multpiple: Number of discrete trigger events in In 2 pin before output is triggered
+  const int mult2 = 1;
+  
+  // Analog in high threshold: value on Analog In, in volts, that triggers output when reached or exceeded.  If blank, does not respond no matter how high the value
+  const int analogHigh = 0;
+  //Analog in low threshold: value on Analog In, in volts; triggers output if value is lower than this
+  const int analogLow = 0;
+  
+  
+ 
  // Associate physical button states with their output
 #define UP          HIGH
 #define DOWN        LOW
+
+//Set pins
+const int in1 = 5;
+const int in2 = 6;
+const int relayActivation = 7;
+const int vin = 30;
+const int out = 20;
+const int analogIn = 22;
+const int fiveV = 27;
+
+
+void setup(){
+
+}
+
+void loop(){
+
+}
