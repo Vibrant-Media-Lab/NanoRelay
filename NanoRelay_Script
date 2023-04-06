@@ -4,7 +4,7 @@
  * Pitt Vibrant Media Lab: 2023
  */
  
- //User specific parameters
+ //User specific Parameters//
  
   //In 1 delay: duration of time in ms that In 1 pin needs to be pulled low before it leads to a trigger event
   const int duration1 = 0;
@@ -22,13 +22,29 @@
   //Analog in low threshold: value on Analog In, in volts; triggers output if value is lower than this
   const int analogLow = 0;
   
+  //Upon trigger event, delay before relay is activated
+  const int relayDelay = 0;
+  //Time, in ms, that relay is activated
+  const int relayDuration = 100;
+  //Number of times the relay is activated after a single trigger event
+  const int relayMultiple = 1;
+  //Delay between multiple activations (if “Relay multiple” is >1)
+  const int relayInterval = 0;
   
- 
- // Associate physical button states with their output
-#define UP          HIGH
-#define DOWN        LOW
+  //Upon trigger event, delay before output is activated
+  const int outDelay = 0;
+  //Time, in ms, that output is activated
+  const int outDuration = 100;
+  //Number of times the output is activated after a single trigger event
+  const int outMultiple = 1;
+  //Delay between multiple activations (if “Output multiple” is >1)
+  const int outInterval = 0;
+  //duration after the end of all outputs before any input is accepted
+  const int outputPause = 0;
+  
 
-//Set pins
+
+//Set pins//
 const int in1 = 5;
 const int in2 = 6;
 const int relayActivation = 7;
@@ -38,10 +54,47 @@ const int analogIn = 22;
 const int fiveV = 27;
 
 
-void setup(){
+// Associate physical button states with their output//
+#define UP          HIGH
+#define DOWN        LOW
 
+//Programming//
+volatile int in1_state = UP;
+volatile int in2_state = DOWN;
+volatile unsigned long in1_last_input = 0;
+volatile unsigned long in1_hold_duration = 0;
+volatile unsigned long in2_last_input = 0;
+volatile unsigned long in2_hold_duration = 0;
+
+// TRIGGER //
+const long trigger_active_period = 35; // Roughly 1/30 s
+volatile int trigger_button_state = UP;
+volatile unsigned long trigger_button_last_input = 0;
+
+// RELAY //
+volatile int relay_state = LOW;
+volatile int gate_output = LOW;
+volatile int trigger_output = LOW;
+
+
+void setup(){
+  pinMode(in1, INPUT)
+  pinMode(in2, INPUT)
+  pinMode(relayActivation, OUTPUT)
+  pinMode(vin, INPUT)
+  pinMode(out, OUTPUT)
+  pinMode(analogIn, INPUT)
 }
 
 void loop(){
 
+  if(millis() - in1_last_input >= duration1 && in1_state == DOWN) {
+    delay(relayDelay)
+    relay_state = UP;
+    delay(delay1);
+  }
+  
+  if(millis() - in2_last_input >= duration2 && in2_state == DOWN) {
+
+  }
 }
