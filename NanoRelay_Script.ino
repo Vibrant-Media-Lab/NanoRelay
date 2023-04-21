@@ -5,7 +5,8 @@
  */
  
  //User specific Parameters//
- 
+ //TODO: Change the parameters to fit your specific needs
+
   //In 1 delay: duration of time in ms that In 1 pin needs to be pulled low before it leads to a trigger event
   const int duration1 = 100;
   //In 1 delay: period of time after a trigger event that no further input from In 1 will be accepted, in ms
