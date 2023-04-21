@@ -7,20 +7,20 @@
  //User specific Parameters//
  
   //In 1 delay: duration of time in ms that In 1 pin needs to be pulled low before it leads to a trigger event
-  const int duration1 = 0;
-  //In 1 delay: duration of time that In 1 pin needs to be pulled low before it leads to a trigger event
-  const int delay1 = 0;
+  const int duration1 = 100;
+  //In 1 delay: period of time after a trigger event that no further input from In 1 will be accepted, in ms
+  const int delay1 = 10;
   
   //In 2 duration and delay same as In1 but for the In 2 pin
-  const int duration2 = 0;
-  const int delay2 = 0;
+  const int duration2 = 100;
+  const int delay2 = 10;
   // In 2 multpiple: Number of discrete trigger events in In 2 pin before output is triggered
   const int mult2 = 1;
   
   // Analog in high threshold: value on Analog In, in volts, that triggers output when reached or exceeded.  If blank, does not respond no matter how high the value
-  const int analogHigh = 0;
+  const int analogHigh = 4;
   //Analog in low threshold: value on Analog In, in volts; triggers output if value is lower than this
-  const int analogLow = 0;
+  const int analogLow = 6;
   
   //Upon trigger event, delay before relay is activated
   const int relayDelay = 0;
