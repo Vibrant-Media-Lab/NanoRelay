@@ -55,7 +55,7 @@ Output pause:  duration after the end of all outputs before any input is accepte
 
 CURRENT STATE:
 
-The script was written but not tested because of the malfunctioning of the arduino. We need to order a new arduino in order to run and test the script to continue the project. I wrote this script with any prior arduino experience, so I expect it to need a lot of debugging and not work correctly. The IN2 is still not implemented, as in order to implement it, we need the rest to work. 
+The script was written but not tested because of the malfunctioning of the arduino. We need to order a new arduino in order to run and test the script to continue the project. I wrote this script without any prior arduino experience, so I expect it to need a lot of debugging and not work correctly. The IN2 is still not implemented, as in order to implement it, we need the rest to work. 
 
 
 
