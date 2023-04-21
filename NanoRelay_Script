@@ -40,7 +40,7 @@
   //Delay between multiple activations (if “Output multiple” is >1)
   const int outInterval = 0;
   //duration after the end of all outputs before any input is accepted
-  const int outputPause = 0;
+  const int outPause = 0;
   
 
 
@@ -76,25 +76,74 @@ volatile int relay_state = LOW;
 volatile int gate_output = LOW;
 volatile int trigger_output = LOW;
 
+//ANALOG//
+volatile int analog_state = LOW;
+
+
+//GENERAL TIMING//
+const long contactBounce = 50;
+
 
 void setup(){
-  pinMode(in1, INPUT)
-  pinMode(in2, INPUT)
-  pinMode(relayActivation, OUTPUT)
-  pinMode(vin, INPUT)
-  pinMode(out, OUTPUT)
-  pinMode(analogIn, INPUT)
+  Serial.begin(9600);
+
+  
+  pinMode(in1, INPUT);
+  pinMode(in2, INPUT);
+  pinMode(relayActivation, OUTPUT);
+  pinMode(out, OUTPUT);
+  pinMode(analogIn, INPUT);
+  
+  attachInterrupt(digitalPinToInterrupt(in1), isr_in1, CHANGE);
 }
 
 void loop(){
-
-  if(millis() - in1_last_input >= duration1 && in1_state == DOWN) {
-    delay(relayDelay)
-    relay_state = UP;
-    delay(delay1);
+  
+  if(analogRead(analogIn) < analogLow && analogRead(analogIn) >= analogHigh && analogHigh != 0 ){
+    relayRun(); 
+    relay_state = LOW;
   }
   
-  if(millis() - in2_last_input >= duration2 && in2_state == DOWN) {
+}
 
+void isr_in1(){
+  
+  if(millis() - in1_last_input >= duration1){  
+    if (millis() - in1_last_input >= contactBounce){
+      in1_last_input = millis();
+    }
+    
+    if(in1_state == DOWN){
+      in1_state = UP;
+    } else {
+      in1_state = DOWN;
+      relay_state = UP;
+      relayRun();
+    }
+  }  
+  
+    delay(delay1);
+}
+
+
+void relayRun(){
+  for (int i = 0; i < relayMultiple; i++){
+    delay(relayDelay);
+    relay_state = UP;
+    digitalWrite(relayActivation, relay_state);
+    long relayStart = millis();
+    while(millis() - relayStart < relayDuration){
+      delay(outDelay);
+      for (int j = 0; j < outMultiple; j++){
+        long outStart = millis();
+        while(millis() - outStart < outDuration){
+          digitalWrite(out, HIGH);
+        }
+        delay(outInterval);
+      }
+      
+    }
+    delay(relayInterval);
   }
+  delay(outPause);
 }
